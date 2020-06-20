@@ -1,4 +1,4 @@
-package loja.api.model;
+package loja.api.model.entity;
 
 import javax.persistence.Entity;
 
@@ -11,14 +11,16 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "tb_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_USER")
     private Long id;
 
-    private String name;
+    @Column(name = "USER_NAME")
+    private String userName;
 
 
 

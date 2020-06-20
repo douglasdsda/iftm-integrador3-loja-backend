@@ -13,10 +13,10 @@ import javax.persistence.GenerationType;
 @AllArgsConstructor
 public class UserDto {
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String userName;
 
 
 }

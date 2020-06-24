@@ -12,13 +12,8 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("administrador")
 @Entity(name = "tb_administrador")
 public class Administrador extends Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_administrador")
-    private Long id;
 
     @Column(name = "ultimo_ajuste")
     private String ultimoAjuste;

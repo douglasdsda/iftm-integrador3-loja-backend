@@ -12,13 +12,8 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("cliente")
 @Entity(name = "tb_cliente")
 public class Cliente extends Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_cliente")
-    private Long id;
 
     @Column(name = "cpf")
     private String cpf;

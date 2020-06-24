@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tb_user")
+@Entity(name = "tb_user_teste")
 public class User {
 
     @Id

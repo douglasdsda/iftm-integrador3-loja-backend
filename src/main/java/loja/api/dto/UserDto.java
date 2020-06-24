@@ -13,9 +13,6 @@ import javax.persistence.GenerationType;
 @AllArgsConstructor
 public class UserDto {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String userName;
 
 

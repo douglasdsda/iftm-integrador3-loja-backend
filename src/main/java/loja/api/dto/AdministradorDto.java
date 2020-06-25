@@ -1,4 +1,5 @@
 package loja.api.dto;
+import loja.api.model.entity.Administrador;
 import loja.api.model.enums.TipoUsuario;
 import lombok.*;
 
@@ -24,7 +25,9 @@ public class AdministradorDto {
 
     private String senha;
 
-    private TipoUsuario tipoUsuario;
+
+
+
 
 
 }

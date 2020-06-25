@@ -13,14 +13,14 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Entity(name = "tb_usuario")
 public abstract class Usuario implements  Serializable {
 
-
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
     @Column(name = "nome")
@@ -37,7 +37,7 @@ public abstract class Usuario implements  Serializable {
     @Column(name = "senha")
     private String senha;
 
-    @Column(name = "tipoUsuario")
-    private TipoUsuario tipoUsuario;
+  //  @Column(name = "tipoUsuario")
+  //  private TipoUsuario tipoUsuario;
 
 }

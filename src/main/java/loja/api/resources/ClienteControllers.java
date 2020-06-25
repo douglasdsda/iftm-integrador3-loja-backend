@@ -3,7 +3,9 @@ package loja.api.resources;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import loja.api.dto.AdministradorDto;
 import loja.api.dto.ClienteDto;
+import loja.api.model.entity.Administrador;
 import loja.api.model.entity.Cliente;
 import loja.api.services.ClienteService;
 import lombok.RequiredArgsConstructor;
@@ -39,14 +41,25 @@ public class ClienteControllers {
     }
 
     @GetMapping
-    public Page<ClienteDto> find(ClienteDto dto, Pageable pageRequest) {
-        Cliente filter = modelMapper.map(dto, Cliente.class);
-        Page<Cliente> result = service.find(filter, pageRequest);
+    public Page<ClienteDto> find(String nome, Pageable pageRequest) {
+
+        Page<Cliente> result = service.find(nome, pageRequest);
         List<ClienteDto> list  =  result.getContent()
                 .stream()
                 .map( entity -> modelMapper.map(entity, ClienteDto.class))
                 .collect(Collectors.toList());
         return new PageImpl<ClienteDto>( list, pageRequest, result.getTotalElements());
+    }
+
+
+
+    @GetMapping("/all")
+    public List<ClienteDto> findAll() {
+
+        List<Cliente> result = service.findByAll();
+        List<ClienteDto> listDto=   result.stream().map( entity -> modelMapper.map(entity, ClienteDto.class
+        )).collect(Collectors.toList());
+        return listDto;
     }
 
 }

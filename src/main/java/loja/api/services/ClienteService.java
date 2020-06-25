@@ -1,13 +1,18 @@
 package loja.api.services;
 
+
 import loja.api.model.entity.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface ClienteService {
 
-    public Cliente save(Cliente user);
+     Cliente save(Cliente user);
 
-    Page<Cliente> find(Cliente filter, Pageable pageRequest);
+    Page<Cliente>find(String nome, Pageable pageRequest);
+
+    List<Cliente> findByAll();
 
 }

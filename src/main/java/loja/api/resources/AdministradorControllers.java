@@ -42,14 +42,25 @@ public class AdministradorControllers {
     }
 
     @GetMapping
-    public Page<AdministradorDto> find(AdministradorDto dto, Pageable pageRequest) {
-        Administrador filter = modelMapper.map(dto, Administrador.class);
-        Page<Administrador> result = service.find(filter, pageRequest);
+    public Page<AdministradorDto> find(String nome, Pageable pageRequest) {
+
+        Page<Administrador> result = service.find(nome, pageRequest);
         List<AdministradorDto> list  =  result.getContent()
                 .stream()
                 .map( entity -> modelMapper.map(entity, AdministradorDto.class))
                 .collect(Collectors.toList());
         return new PageImpl<AdministradorDto>( list, pageRequest, result.getTotalElements());
+    }
+
+
+
+    @GetMapping("/all")
+    public List<AdministradorDto> findAll() {
+
+        List<Administrador> result = service.findByAll();
+        List<AdministradorDto> listDto=   result.stream().map( entity -> modelMapper.map(entity, AdministradorDto.class
+            )).collect(Collectors.toList());
+        return listDto;
     }
 
 }

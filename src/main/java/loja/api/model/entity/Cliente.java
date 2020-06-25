@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "tb_cliente")
+@PrimaryKeyJoinColumn(name="idPessoa")
 public class Cliente extends Usuario {
 
     @Column(name = "cpf")

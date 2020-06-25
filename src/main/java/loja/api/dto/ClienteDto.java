@@ -33,7 +33,7 @@ public class ClienteDto {
 
     private String senha;
 
-    private TipoUsuario tipoUsuario;
+
 
 
 }

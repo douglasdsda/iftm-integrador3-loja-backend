@@ -13,9 +13,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "tb_administrador")
+@PrimaryKeyJoinColumn(name="idPessoa")
 public class Administrador extends Usuario {
 
     @Column(name = "ultimo_ajuste")
     private String ultimoAjuste;
+
+
 
 }

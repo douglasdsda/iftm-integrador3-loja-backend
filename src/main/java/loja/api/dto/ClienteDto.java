@@ -34,6 +34,6 @@ public class ClienteDto {
     private String senha;
 
 
-
+    private String sexo;
 
 }

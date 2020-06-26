@@ -13,11 +13,11 @@ import java.util.List;
 public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
 
     @Transactional(readOnly = true)
-    @Query("SELECT obj FROM loja.api.model.entity.Administrador obj where LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome, '%'))")
+    @Query("SELECT obj FROM Administrador obj where LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome, '%'))")
     Page<Administrador> findByNomeContainingIgnoreCase(@Param("nome") String nome, Pageable pageable);
 
 
-    @Query("SELECT obj FROM loja.api.model.entity.Administrador obj ")
+    @Query("SELECT obj FROM Administrador obj ")
     List<Administrador> findByAll();
 
 }

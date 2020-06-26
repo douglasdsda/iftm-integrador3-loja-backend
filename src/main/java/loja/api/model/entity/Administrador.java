@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tb_administrador")
-@PrimaryKeyJoinColumn(name="idPessoa")
+@Entity
+@PrimaryKeyJoinColumn(name="idUsuario")
 public class Administrador extends Usuario {
 
     @Column(name = "ultimo_ajuste")

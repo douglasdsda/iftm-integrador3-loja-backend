@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tb_cliente")
+@Entity
 @PrimaryKeyJoinColumn(name="idPessoa")
 public class Cliente extends Usuario {
 

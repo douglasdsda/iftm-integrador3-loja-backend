@@ -33,7 +33,7 @@ public class AdministradorControllers {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation("CREATE A ADMINISTRADOR")
+    @ApiOperation("criar o administrador")
     public AdministradorDto create(@RequestBody AdministradorDto dto) {
 
         Administrador entity = modelMapper.map(dto, Administrador.class);
@@ -41,20 +41,8 @@ public class AdministradorControllers {
         return modelMapper.map(entity, AdministradorDto.class);
     }
 
-    @GetMapping
-    public Page<AdministradorDto> find(String nome, Pageable pageRequest) {
-
-        Page<Administrador> result = service.find(nome, pageRequest);
-        List<AdministradorDto> list  =  result.getContent()
-                .stream()
-                .map( entity -> modelMapper.map(entity, AdministradorDto.class))
-                .collect(Collectors.toList());
-        return new PageImpl<AdministradorDto>( list, pageRequest, result.getTotalElements());
-    }
-
-
-
     @GetMapping("/all")
+    @ApiOperation("listar todos os administradores")
     public List<AdministradorDto> findAll() {
 
         List<Administrador> result = service.findByAll();

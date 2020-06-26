@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-@Entity(name = "tb_usuario")
+@Entity
 public abstract class Usuario implements  Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,7 +37,8 @@ public abstract class Usuario implements  Serializable {
     @Column(name = "senha")
     private String senha;
 
-  //  @Column(name = "tipoUsuario")
-  //  private TipoUsuario tipoUsuario;
+    @Column(name = "sexo")
+    private String sexo;
+
 
 }

@@ -30,8 +30,8 @@ public class AdministradorServiceImpl implements AdministradorService {
 
     @Override
     public Page<Administrador> find(String nome, Pageable pageRequest) {
-           Page<Administrador> list;
-           nome = nome == null ? nome : "";
+
+           nome = nome != null ? nome : "";
 
            return repository.findByNomeContainingIgnoreCase(nome, pageRequest);
 

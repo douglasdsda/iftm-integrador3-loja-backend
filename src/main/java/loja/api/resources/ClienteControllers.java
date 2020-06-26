@@ -40,20 +40,8 @@ public class ClienteControllers {
         return modelMapper.map(entity, ClienteDto.class);
     }
 
-    @GetMapping
-    public Page<ClienteDto> find(String nome, Pageable pageRequest) {
-
-        Page<Cliente> result = service.find(nome, pageRequest);
-        List<ClienteDto> list  =  result.getContent()
-                .stream()
-                .map( entity -> modelMapper.map(entity, ClienteDto.class))
-                .collect(Collectors.toList());
-        return new PageImpl<ClienteDto>( list, pageRequest, result.getTotalElements());
-    }
-
-
-
     @GetMapping("/all")
+    @ApiOperation("listar todos os Clientes")
     public List<ClienteDto> findAll() {
 
         List<Cliente> result = service.findByAll();

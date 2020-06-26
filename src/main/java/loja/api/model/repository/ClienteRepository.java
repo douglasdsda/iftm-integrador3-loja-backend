@@ -13,9 +13,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     boolean existsByCpf(String cpf);
 
-    @Query("SELECT obj FROM loja.api.model.entity.Cliente obj where LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome, '%'))")
+    @Query("SELECT obj FROM Cliente obj where LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome, '%'))")
     Page<Cliente> findByNomeContainingIgnoreCase(@Param("nome") String nome, Pageable pageable);
 
-    @Query("SELECT obj FROM loja.api.model.entity.Cliente obj ")
+    @Query("SELECT obj FROM Cliente obj ")
     List<Cliente> findByAll();
 }

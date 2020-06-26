@@ -33,7 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Page<Cliente> find(String nome, Pageable pageRequest) {
         Page<Cliente> list;
-        nome = nome == null ? nome : "";
+        nome = nome != null ? nome : "";
 
         return repository.findByNomeContainingIgnoreCase(nome, pageRequest);
 

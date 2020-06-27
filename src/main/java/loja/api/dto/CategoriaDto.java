@@ -10,6 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 public class CategoriaDto {
 
+    private Long idCategoria;
+
     private String nome;
 
     private TipoCategoria tipoCategoria;

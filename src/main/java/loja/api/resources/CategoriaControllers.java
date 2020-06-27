@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,13 +40,19 @@ public class CategoriaControllers {
     }
 
     @GetMapping("/all")
-    @ApiOperation("listar todos os administradores")
+    @ApiOperation("listar todos os categorias")
     public List<CategoriaDto> findAll() {
 
         List<Categoria> result = service.findByAll();
         List<CategoriaDto> listDto=   result.stream().map( entity -> modelMapper.map(entity, CategoriaDto.class
             )).collect(Collectors.toList());
         return listDto;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

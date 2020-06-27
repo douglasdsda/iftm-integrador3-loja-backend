@@ -1,18 +1,21 @@
 package loja.api.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public abstract class Categoria implements  Serializable {
+public class Categoria implements  Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,6 +31,51 @@ public abstract class Categoria implements  Serializable {
     @NotNull
     private String tipoCategoria;
 
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Produto> produtos = new HashSet<>();
+
+    private Instant dataCriacao;
+
+    private Instant dataAtualizacao;
+
+    public Long getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTipoCategoria() {
+        return tipoCategoria;
+    }
+
+    public void setTipoCategoria(String tipoCategoria) {
+        this.tipoCategoria = tipoCategoria;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        dataAtualizacao = Instant.now();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        dataAtualizacao = now;
+        dataCriacao = now;
+    }
 
 
+    public Set<Produto> getProducts() {
+        return produtos;
+    }
 }

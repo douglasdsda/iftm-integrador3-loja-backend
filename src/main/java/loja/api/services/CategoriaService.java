@@ -15,4 +15,6 @@ public interface CategoriaService {
 
     List<Categoria> findByAll();
 
+    void delete(Long id);
+
 }

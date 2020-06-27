@@ -41,5 +41,10 @@ public class CategoriaServiceImpl implements CategoriaService {
     public List<Categoria> findByAll() {
         return repository.findByAll();
     }
- 
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 }

@@ -21,4 +21,5 @@ public interface EntregadorRepository extends JpaRepository<Entregador, Long> {
     @Query(value = "SELECT a FROM Entregador a ")
     List<Entregador> findByAll();
 
+
 }

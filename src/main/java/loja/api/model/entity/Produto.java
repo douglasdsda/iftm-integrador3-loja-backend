@@ -1,14 +1,9 @@
 package loja.api.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,6 +36,9 @@ public class Produto implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "idCategoria")
     )
     private Set<Categoria> categorias = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemCompra> itens = new HashSet<>();
 
     public Produto(){}
 
@@ -96,6 +94,11 @@ public class Produto implements Serializable {
         return categorias;
     }
 
-
-
+    public Set<Compra> getCompras(){
+        Set<Compra> set = new HashSet<>();
+        for(ItemCompra x : itens) {
+            set.add(x.getCompra());
+        }
+        return set;
+    }
 }

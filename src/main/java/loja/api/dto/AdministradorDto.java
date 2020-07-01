@@ -26,7 +26,6 @@ public class AdministradorDto {
     private String senha;
 
 
-
     private String sexo;
 
 

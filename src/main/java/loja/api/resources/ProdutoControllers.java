@@ -59,9 +59,13 @@ public class ProdutoControllers {
     public ResponseEntity<ProdutoDto> insert( @RequestBody ProdutoCategoriaDto dto) {
         ProdutoDto newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getIdProduto()).toUri();
-
         return ResponseEntity.created(uri).body(newDto);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

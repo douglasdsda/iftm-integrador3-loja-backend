@@ -3,9 +3,12 @@ package loja.api.resources;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import loja.api.dto.EntregadorDto;
-import loja.api.model.entity.Entregador;
-import loja.api.services.EntregadorService;
+import loja.api.dto.PagamentoDto;
+import loja.api.dto.PagamentoDto;
+import loja.api.model.entity.Pagamento;
+import loja.api.model.entity.Pagamento;
+import loja.api.services.CompraService;
+import loja.api.services.PagamentoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -17,31 +20,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/entregadores")
+@RequestMapping(value = "/api/pagamentos")
 @RequiredArgsConstructor
 @Slf4j
-@Api("Entregador API")
-public class EntregadorControllers {
+@Api("Pagamento API")
+public class PagamentoControllers {
 
-    private final EntregadorService service;
+    private final PagamentoService service;
     private final ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation("CREATE A Entregador")
-    public EntregadorDto create(@RequestBody EntregadorDto dto) {
+    @ApiOperation("criar o Pagamento")
+    public PagamentoDto create(@RequestBody PagamentoDto dto) {
 
-        Entregador entity = modelMapper.map(dto, Entregador.class);
+        Pagamento entity = modelMapper.map(dto, Pagamento.class);
         entity = service.save(entity);
-        return modelMapper.map(entity, EntregadorDto.class);
+        return modelMapper.map(entity, PagamentoDto.class);
     }
 
     @GetMapping("/all")
-    @ApiOperation("listar todos os Entregadores")
-    public List<EntregadorDto> findAll() {
+    @ApiOperation("listar todos os pagamentos")
+    public List<PagamentoDto> findAll() {
 
-        List<Entregador> result = service.findByAll();
-        List<EntregadorDto> listDto = result.stream().map( entity -> modelMapper.map(entity, EntregadorDto.class
+        List<Pagamento> result = service.findByAll();
+        List<PagamentoDto> listDto =  result.stream().map( entity -> modelMapper.map(entity, PagamentoDto.class
             )).collect(Collectors.toList());
         return listDto;
     }

@@ -1,9 +1,10 @@
 package loja.api.services;
 
+
 import loja.api.exception.BusinessException;
-import loja.api.model.entity.Administrador;
-import loja.api.model.entity.Categoria;
-import loja.api.model.repository.CategoriaRepository;
+import loja.api.model.entity.Cliente;
+import loja.api.model.entity.Pagamento;
+import loja.api.model.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,32 +12,21 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
-
 @Service
-public class CategoriaService {
+public class PagamentoService {
 
     @Autowired
-    private CategoriaRepository repository;
+    private PagamentoRepository repository;
 
+    public Pagamento save(Pagamento cliente) {
 
-
-
-    public Categoria save(Categoria entity) {
-
-        return repository.save(entity);
+        return repository.save(cliente);
     }
 
 
-    public Page<Categoria> find(String nome, Pageable pageRequest) {
-        Page<Categoria> list;
-        nome = nome != null ? nome : "";
-
-        return repository.findByNomeContainingIgnoreCase(nome, pageRequest);
-
-    }
 
 
-    public List<Categoria> findByAll() {
+    public List<Pagamento> findByAll() {
         return repository.findByAll();
     }
 

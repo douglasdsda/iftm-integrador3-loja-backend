@@ -1,11 +1,11 @@
 package loja.api.model.enums;
 
-public enum TipoUsuario {
-    CLIENTE(1), ENTREGADOR(2), ADMINISTRADOR(3);
+public enum StatusCompra {
+            PAGO(1), ESPERANDO(2), VENCIDO(3);
 
     private int code;
 
-    private TipoUsuario(int code) {
+    StatusCompra(int code) {
         this.code = code;
     }
 
@@ -13,13 +13,13 @@ public enum TipoUsuario {
         return this.code;
     }
 
-    public static TipoUsuario valueOf(int code) {
-        for (TipoUsuario value : TipoUsuario.values()) {
+    public static StatusCompra valueOf(int code) {
+        for (StatusCompra value : StatusCompra.values()) {
             if (value.getCode() == code) {
                 return value;
             }
 
         }
-        throw new IllegalMonitorStateException("Codigo TipoUsuario invalido.");
+        throw new IllegalMonitorStateException("Codigo invalido.");
     }
 }

@@ -9,73 +9,99 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Categoria implements  Serializable {
+public class Compra implements  Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoria;
+    private Long idCompra;
 
-    @Column(name = "nome")
+    @Column(name = "data")
     @NotNull
-    private String nome;
+    private Instant data;
 
-    @Column(name = "tipoCategoria")
+    @Column(name = "statusCompra")
     @NotNull
-    private String tipoCategoria;
+    private String statusCompra;
 
-    @ManyToMany(mappedBy = "categorias")
-    private Set<Produto> produtos = new HashSet<>();
+    @OneToOne(mappedBy = "compra", cascade = CascadeType.ALL)
+    private Pagamento pagamento;
 
-    private Instant dataCriacao;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Cliente cliente;
 
-    private Instant dataAtualizacao;
+    @OneToMany(mappedBy = "id.compra")
+    private Set<ItemCompra> itens = new HashSet<>();
 
-    public Long getIdCategoria() {
-        return idCategoria;
+    public Compra(){}
+
+    public Compra(Long idCompra, Instant data, String statusCompra) {
+        this.idCompra = idCompra;
+        this.data = data;
+        this.statusCompra = statusCompra;
+        this.pagamento = pagamento;
     }
 
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
+    public Long getIdCompra() {
+        return idCompra;
     }
 
-    public String getNome() {
-        return nome;
+    public void setIdCompra(Long idCompra) {
+        this.idCompra = idCompra;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Instant getData() {
+        return data;
     }
 
-    public String getTipoCategoria() {
-        return tipoCategoria;
+    public void setData(Instant data) {
+        this.data = data;
     }
 
-    public void setTipoCategoria(String tipoCategoria) {
-        this.tipoCategoria = tipoCategoria;
+    public String getStatusCompra() {
+        return statusCompra;
     }
 
-    @PreUpdate
-    public void preUpdate() {
-        dataAtualizacao = Instant.now();
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    @PrePersist
-    public void prePersist() {
-        Instant now = Instant.now();
-        dataAtualizacao = now;
-        dataCriacao = now;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
+    public void setStatusCompra(String statusCompra) {
+        this.statusCompra = statusCompra;
+    }
 
-    public Set<Produto> getProducts() {
-        return produtos;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Set<Compra> getCompras(){
+        Set<Compra> set = new HashSet<>();
+        for(ItemCompra x : itens) {
+            set.add(x.getCompra());
+        }
+        return set;
+    }
+
+    public Double getTotal() {
+        Double sum = 0.0;
+        for(ItemCompra x: itens) {
+            sum+= x.getSubTotal();
+        }
+        return sum;
+    }
+
+    public Set<ItemCompra> getItens(){
+        return itens;
     }
 }

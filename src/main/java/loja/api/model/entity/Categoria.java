@@ -75,7 +75,7 @@ public class Categoria implements  Serializable {
     }
 
 
-    public Set<Produto> getProducts() {
+    public Set<Produto> getProdutos() {
         return produtos;
     }
 }

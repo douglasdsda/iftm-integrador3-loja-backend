@@ -15,7 +15,7 @@ public class PagamentoDto {
 
     private Long idPagamento;
 
-    private Compra compra;
+    private Long idCompra;
 
     private Instant data;
 

@@ -5,6 +5,7 @@ import loja.api.model.entity.Compra;
 import loja.api.model.entity.ItemCompra;
 import loja.api.model.entity.Produto;
 import loja.api.model.enums.StatusCompra;
+import loja.api.model.enums.StatusEntrega;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class CompraDto {
 
     private Long idCompra;
 
-    private String statusCompra;
+    private StatusCompra statusCompra;
 
     private Instant data;
 
@@ -37,7 +38,7 @@ public class CompraDto {
 
     CompraDto(){}
 
-    public CompraDto(Long idCompra, String statusCompra, Instant data, Cliente cliente) {
+    public CompraDto(Long idCompra, StatusCompra statusCompra, Instant data, Cliente cliente) {
         this.idCompra = idCompra;
         this.statusCompra = statusCompra;
         this.data = data;
@@ -46,7 +47,7 @@ public class CompraDto {
 
     public CompraDto(Compra entity) {
         setIdCompra(entity.getIdCompra());
-        setStatusCompra(entity.getStatusCompra());
+        setStatusCompra(StatusCompra.valueOf(entity.getStatusCompra()));
         setData(entity.getData());
         setCliente(entity.getCliente());
     }

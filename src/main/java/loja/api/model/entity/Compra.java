@@ -36,6 +36,9 @@ public class Compra implements  Serializable {
     @OneToMany(mappedBy = "id.compra")
     private Set<ItemCompra> itens = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.compra")
+    private Set<Entrega> entregas = new HashSet<>();
+
     public Compra(){}
 
     public Compra(Long idCompra, Instant data, String statusCompra) {
@@ -92,6 +95,16 @@ public class Compra implements  Serializable {
         }
         return set;
     }
+
+
+    public Set<Compra> getEntregas(){
+        Set<Compra> set = new HashSet<>();
+        for(Entrega x : entregas) {
+            set.add(x.getCompra());
+        }
+        return set;
+    }
+
 
     public Double getTotal() {
         Double sum = 0.0;

@@ -1,5 +1,6 @@
 package loja.api.model.entity;
 
+import loja.api.model.enums.StatusCompra;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Compra implements  Serializable {
 
     @Column(name = "statusCompra")
     @NotNull
-    private String statusCompra;
+    private Integer statusCompra;
 
     @OneToOne(mappedBy = "compra", cascade = CascadeType.ALL)
     private Pagamento pagamento;
@@ -41,10 +42,10 @@ public class Compra implements  Serializable {
 
     public Compra(){}
 
-    public Compra(Long idCompra, Instant data, String statusCompra) {
+    public Compra(Long idCompra, Instant data, StatusCompra statusCompra) {
         this.idCompra = idCompra;
         this.data = data;
-        this.statusCompra = statusCompra;
+        this.statusCompra = statusCompra.getCode();
         this.pagamento = pagamento;
     }
 
@@ -64,8 +65,8 @@ public class Compra implements  Serializable {
         this.data = data;
     }
 
-    public String getStatusCompra() {
-        return statusCompra;
+    public StatusCompra getStatusCompra() {
+        return StatusCompra.valueOf(statusCompra);
     }
 
     public Pagamento getPagamento() {
@@ -76,8 +77,8 @@ public class Compra implements  Serializable {
         this.pagamento = pagamento;
     }
 
-    public void setStatusCompra(String statusCompra) {
-        this.statusCompra = statusCompra;
+    public void setStatusCompra(StatusCompra statusCompra) {
+        this.statusCompra = statusCompra.getCode();
     }
 
     public Cliente getCliente() {

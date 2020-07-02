@@ -5,13 +5,12 @@ import loja.api.model.enums.TipoCategoria;
 import lombok.*;
 
 import javax.persistence.Column;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
-@Builder
-@Setter
-@Getter
 public class ProdutoDto {
 
     private Long idProduto;
@@ -26,6 +25,10 @@ public class ProdutoDto {
 
 
     private double preco;
+
+   // private Categoria categoria;
+
+    private List<CategoriaDto> categorias = new ArrayList<>();
 
     ProdutoDto(){}
 
@@ -44,5 +47,57 @@ public class ProdutoDto {
         setPreco(entity.getPreco());
         setQtdEstoque(entity.getQtdEstoque());
 
+    }
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Integer getQtdEstoque() {
+        return qtdEstoque;
+    }
+
+    public void setQtdEstoque(Integer qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public List<CategoriaDto> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<CategoriaDto> categorias) {
+        this.categorias = categorias;
+    }
+
+    public Produto toEntity() {
+        return new Produto(null, nome,descricao , qtdEstoque, preco);
     }
 }

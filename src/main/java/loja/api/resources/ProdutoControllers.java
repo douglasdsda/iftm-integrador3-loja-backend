@@ -56,7 +56,7 @@ public class ProdutoControllers {
 
     @PostMapping()
     @ApiOperation("criar produto com categoria")
-    public ResponseEntity<ProdutoDto> insert( @RequestBody ProdutoCategoriaDto dto) {
+    public ResponseEntity<ProdutoDto> insert( @RequestBody ProdutoDto dto) {
         ProdutoDto newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getIdProduto()).toUri();
         return ResponseEntity.created(uri).body(newDto);

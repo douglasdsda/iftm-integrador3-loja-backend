@@ -38,7 +38,7 @@ public class ProdutoService {
     }
 
 
-    public ProdutoDto insert(ProdutoCategoriaDto dto) {
+    public ProdutoDto insert(ProdutoDto dto) {
         Produto entity = dto.toEntity();
         setCategorias(entity, dto.getCategorias());
         entity = repository.save(entity);

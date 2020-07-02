@@ -28,13 +28,10 @@ public class CompraDto {
 
     private Instant data;
 
-
    private Cliente cliente;
-
 
     @OneToMany(mappedBy = "cliente")
     private List<Compra> orders = new ArrayList<>();
-
 
     CompraDto(){}
 
@@ -47,7 +44,7 @@ public class CompraDto {
 
     public CompraDto(Compra entity) {
         setIdCompra(entity.getIdCompra());
-        setStatusCompra(StatusCompra.valueOf(entity.getStatusCompra()));
+        setStatusCompra(entity.getStatusCompra());
         setData(entity.getData());
         setCliente(entity.getCliente());
     }

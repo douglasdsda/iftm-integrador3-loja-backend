@@ -1,5 +1,6 @@
 package loja.api.model.entity;
 
+import loja.api.model.enums.TipoCategoria;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,10 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 public class Categoria implements  Serializable {
 
@@ -29,7 +27,7 @@ public class Categoria implements  Serializable {
 
     @Column(name = "tipoCategoria")
     @NotNull
-    private String tipoCategoria;
+    private Integer tipoCategoria;
 
     @ManyToMany(mappedBy = "categorias")
     private Set<Produto> produtos = new HashSet<>();
@@ -37,6 +35,14 @@ public class Categoria implements  Serializable {
     private Instant dataCriacao;
 
     private Instant dataAtualizacao;
+
+    public Categoria(){}
+
+    public Categoria(Long idCategoria, String nome, TipoCategoria tipoCategoria) {
+        this.idCategoria = idCategoria;
+        this.nome = nome;
+        this.tipoCategoria = tipoCategoria.getCode();
+    }
 
     public Long getIdCategoria() {
         return idCategoria;
@@ -54,12 +60,12 @@ public class Categoria implements  Serializable {
         this.nome = nome;
     }
 
-    public String getTipoCategoria() {
-        return tipoCategoria;
+    public TipoCategoria getTipoCategoria() {
+        return TipoCategoria.valueOf(tipoCategoria);
     }
 
-    public void setTipoCategoria(String tipoCategoria) {
-        this.tipoCategoria = tipoCategoria;
+    public void setTipoCategoria(TipoCategoria tipoCategoria) {
+        this.tipoCategoria = tipoCategoria.getCode();
     }
 
     @PreUpdate

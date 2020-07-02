@@ -13,20 +13,14 @@ public class AdministradorDto {
 
     private String ultimoAjuste;
 
-
     private String nome;
-
 
     private String endereco;
 
-
     private String email;
-
 
     private String senha;
 
-
     private String sexo;
-
 
 }

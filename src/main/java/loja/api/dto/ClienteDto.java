@@ -21,18 +21,13 @@ public class ClienteDto {
 
     private boolean ativo;
 
-
     private String nome;
-
 
     private String endereco;
 
-
     private String email;
 
-
     private String senha;
-
 
     private String sexo;
 

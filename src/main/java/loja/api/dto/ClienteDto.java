@@ -15,6 +15,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class ClienteDto {
 
+    private Long idCliente;
+
     private String cpf;
 
     private String urlImagem;

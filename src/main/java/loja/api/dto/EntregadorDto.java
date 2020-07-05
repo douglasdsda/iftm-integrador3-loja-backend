@@ -21,4 +21,6 @@ public class EntregadorDto {
 
     private String sexo;
 
+    private Long idUsuario;
+
 }

@@ -32,11 +32,10 @@ public class PagamentoControllers {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("criar o Pagamento")
-    public PagamentoDto create(@RequestBody PagamentoDto dto) {
+    public void create(@RequestBody PagamentoDto dto) {
 
         Pagamento entity = modelMapper.map(dto, Pagamento.class);
-        entity = service.save(entity);
-        return modelMapper.map(entity, PagamentoDto.class);
+        entity = service.save(dto.getIdCompra());
     }
 
     @GetMapping("/all")

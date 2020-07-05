@@ -79,4 +79,8 @@ public class CompraDto {
     public void setItens(List<Item> itens) {
         this.itens = itens;
     }
+
+    public Compra toEntity() {
+        return new Compra(idCompra, statusCompra, itens);
+    }
 }

@@ -3,7 +3,8 @@ package loja.api.resources;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import loja.api.dto.EntregadorDto;
+import loja.api.dto.*;
+import loja.api.model.entity.Entrega;
 import loja.api.model.entity.Entregador;
 import loja.api.services.EntregadorService;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,19 @@ public class EntregadorControllers {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("CREATE A Entregador")
     public EntregadorDto create(@RequestBody EntregadorDto dto) {
-
         Entregador entity = modelMapper.map(dto, Entregador.class);
         entity = service.save(entity);
         return modelMapper.map(entity, EntregadorDto.class);
+
+    }
+
+
+    @PostMapping("/entrega")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("CREATE entrega")
+    public void entrega(@RequestBody EntregaDto dto) {
+        service.entrega(dto);
+
     }
 
     @GetMapping("/all")
@@ -43,6 +53,16 @@ public class EntregadorControllers {
         List<Entregador> result = service.findByAll();
         List<EntregadorDto> listDto = result.stream().map( entity -> modelMapper.map(entity, EntregadorDto.class
             )).collect(Collectors.toList());
+        return listDto;
+    }
+
+    @GetMapping("/entregas")
+    @ApiOperation("listar entregas")
+    public List<EntregaListaDto> findEntregas() {
+
+        List<Entrega> result = service.findEntregas();
+        List<EntregaListaDto> listDto = result.stream().map(entity -> modelMapper.map(new Entrega(entity.getEntregador(), new CompraDto(entity.getCompra()).toEntity()), EntregaListaDto.class
+        )).collect(Collectors.toList());
         return listDto;
     }
 

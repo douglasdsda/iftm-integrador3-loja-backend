@@ -17,7 +17,4 @@ public class Administrador extends Usuario {
 
     @Column(name = "ultimo_ajuste")
     private String ultimoAjuste;
-
-
-
 }

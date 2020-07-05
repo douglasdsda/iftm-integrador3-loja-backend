@@ -10,10 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @PrimaryKeyJoinColumn(name="idUsuario")
 public class Entregador extends Usuario {
@@ -32,9 +29,7 @@ public class Entregador extends Usuario {
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
-
-
-
+/*
     public Set<Entregador> getEntregas(){
         Set<Entregador> set = new HashSet<>();
         for(Entrega x : entregas) {
@@ -42,5 +37,5 @@ public class Entregador extends Usuario {
         }
         return set;
     }
-
+*/
 }

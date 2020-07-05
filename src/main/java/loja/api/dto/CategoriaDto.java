@@ -1,5 +1,6 @@
 package loja.api.dto;
 import loja.api.model.entity.Categoria;
+import loja.api.model.entity.Compra;
 import loja.api.model.entity.Produto;
 import loja.api.model.enums.TipoCategoria;
 import lombok.*;
@@ -22,6 +23,7 @@ public class CategoriaDto {
         this.nome = nome;
         this.tipoCategoria = tipoCategoria;
     }
+
 
     public Long getIdCategoria() {
         return idCategoria;

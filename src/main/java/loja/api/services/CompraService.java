@@ -7,6 +7,7 @@ import loja.api.model.entity.Cliente;
 import loja.api.model.entity.Compra;
 import loja.api.model.entity.ItemCompra;
 import loja.api.model.entity.Produto;
+import loja.api.model.enums.StatusCompra;
 import loja.api.model.repository.CompraRepository;
 import loja.api.model.repository.ItemProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class CompraService {
 
 
     public Compra save(Compra entity, Long idCliente, List<Item> lista) {
+
+        entity.setStatusCompra(StatusCompra.ESPERANDO);
 
         Cliente c = new Cliente();
         c.setIdUsuario(idCliente);

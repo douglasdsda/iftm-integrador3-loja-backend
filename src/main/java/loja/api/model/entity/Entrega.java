@@ -7,8 +7,10 @@ import loja.api.model.enums.StatusEntrega;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.Instant;
 
 
 @Entity
@@ -21,7 +23,7 @@ public class Entrega implements  Serializable {
 
     @Column(name = "data")
     @NotNull
-    private Integer data;
+    private Instant data;
 
     @Column(name = "statusEntrega")
     @NotNull
@@ -29,16 +31,20 @@ public class Entrega implements  Serializable {
 
     public Entrega(){}
 
-    public Entrega(@NotNull Integer data,  StatusEntrega statusEntrega) {
-        this.data = data;
-        this.statusEntrega = statusEntrega.getCode();
+    public Entrega(Entregador entregador, Compra compra) {
+        this.id.setEntregador(entregador);
+        this.id.setCompra(compra);
     }
 
-    public Integer getData() {
+    public Entrega(StatusEntrega statusEntrega) {
+          this.statusEntrega = statusEntrega.getCode();
+    }
+
+    public Instant getData() {
         return data;
     }
 
-    public void setData(Integer data) {
+    public void setData(Instant data) {
         this.data = data;
     }
 
@@ -67,6 +73,10 @@ public class Entrega implements  Serializable {
         this.id.setCompra(entity);
     }
 
-
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        data = now;
+    }
 
 }

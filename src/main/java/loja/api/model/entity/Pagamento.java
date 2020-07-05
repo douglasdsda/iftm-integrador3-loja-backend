@@ -11,12 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 @Entity
 public class Pagamento implements  Serializable {
 
@@ -30,8 +24,45 @@ public class Pagamento implements  Serializable {
     @NotNull
     private Instant data;
 
+    public Pagamento(){}
+
+    public Pagamento(Long idPagamento, Compra compra) {
+        this.idPagamento = idPagamento;
+        this.compra = compra;
+    }
+
     @OneToOne
     @MapsId
     private Compra compra;
+
+    public Long getIdPagamento() {
+        return idPagamento;
+    }
+
+    public void setIdPagamento(Long idPagamento) {
+        this.idPagamento = idPagamento;
+    }
+
+    public Instant getData() {
+        return data;
+    }
+
+    public void setData(Instant data) {
+        this.data = data;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        data = now;
+    }
 
 }

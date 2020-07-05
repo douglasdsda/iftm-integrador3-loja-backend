@@ -1,5 +1,6 @@
 package loja.api.model.entity;
 
+import loja.api.dto.Item;
 import loja.api.model.enums.StatusCompra;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -46,7 +48,23 @@ public class Compra implements  Serializable {
         this.idCompra = idCompra;
         this.data = data;
         this.statusCompra = statusCompra.getCode();
-        this.pagamento = pagamento;
+    }
+
+    public Compra(Long idCompra,  StatusCompra statusCompra,  List<Item> itens) {
+        this.idCompra = idCompra;
+        this.statusCompra = statusCompra.getCode();
+        this.itens = new HashSet<>();
+        itens.forEach(item -> {
+            ItemCompra c = new ItemCompra();
+            c.setPreco(item.getPreco());
+            c.setQuantidade(item.getQuantidade());
+            Compra compra = new Compra();
+            compra.setIdCompra(idCompra);
+            c.setCompra(compra);
+            this.itens.add(c);
+        });
+
+
     }
 
     public Long getIdCompra() {
@@ -88,7 +106,7 @@ public class Compra implements  Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
+/*
     public Set<Compra> getCompras(){
         Set<Compra> set = new HashSet<>();
         for(ItemCompra x : itens) {
@@ -117,5 +135,13 @@ public class Compra implements  Serializable {
 
     public Set<ItemCompra> getItens(){
         return itens;
+    }
+
+ */
+
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        data = now;
     }
 }

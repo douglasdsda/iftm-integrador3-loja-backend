@@ -26,18 +26,17 @@ public class ProdutoDto {
 
     private double preco;
 
-   // private Categoria categoria;
-
-    private List<CategoriaDto> categorias = new ArrayList<>();
+    private Long idCategoria;
 
     ProdutoDto(){}
 
-    public ProdutoDto(Long idProduto, String nome, String descricao, Integer qtdEstoque, double preco) {
+    public ProdutoDto(Long idProduto, String nome, String descricao, Integer qtdEstoque, double preco, Long idCategoria) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.descricao = descricao;
         this.qtdEstoque = qtdEstoque;
         this.preco = preco;
+        this.idCategoria = idCategoria;
     }
 
     public ProdutoDto(Produto entity) {
@@ -46,6 +45,7 @@ public class ProdutoDto {
         setDescricao(entity.getDescricao());
         setPreco(entity.getPreco());
         setQtdEstoque(entity.getQtdEstoque());
+        setIdCategoria(entity.getCategoria().getIdCategoria());
 
     }
 
@@ -89,12 +89,12 @@ public class ProdutoDto {
         this.preco = preco;
     }
 
-    public List<CategoriaDto> getCategorias() {
-        return categorias;
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategorias(List<CategoriaDto> categorias) {
-        this.categorias = categorias;
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public Produto toEntity() {

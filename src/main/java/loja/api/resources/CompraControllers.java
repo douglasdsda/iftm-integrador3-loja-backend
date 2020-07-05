@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import loja.api.dto.CompraDto;
 import loja.api.dto.CompraDto;
+import loja.api.model.entity.Cliente;
 import loja.api.model.entity.Compra;
 import loja.api.model.entity.Compra;
 import loja.api.services.CategoriaService;
@@ -35,7 +36,7 @@ public class CompraControllers {
     public CompraDto create(@RequestBody CompraDto dto) {
 
         Compra entity = modelMapper.map(dto, Compra.class);
-        entity = service.save(entity);
+        entity = service.save(entity, dto.getIdCliente(), dto.getItens());
         return modelMapper.map(entity, CompraDto.class);
     }
 

@@ -13,6 +13,6 @@ import java.util.List;
 public interface CompraRepository extends JpaRepository<Compra, Long> {
 
 
-    @Query("SELECT obj FROM Cliente obj ")
+    @Query("SELECT obj FROM Compra obj ")
     List<Compra> findByAll();
 }

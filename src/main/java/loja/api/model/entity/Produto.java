@@ -30,12 +30,9 @@ public class Produto implements Serializable {
     @Column(name = "preco")
     private double preco;
 
-    @ManyToMany
-    @JoinTable(name = "Produto_Categoria",
-            joinColumns = @JoinColumn(name = "idProduto"),
-            inverseJoinColumns = @JoinColumn(name = "idCategoria")
-    )
-    private Set<Categoria> categorias = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "idCategoria", nullable = false)
+    private Categoria categoria;
 
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemCompra> itens = new HashSet<>();
@@ -90,8 +87,12 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
-    public Set<Categoria> getCategorias() {
-        return categorias;
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Set<Compra> getCompras(){

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,10 +38,9 @@ public class Compra implements  Serializable {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "id.compra")
-    private Set<ItemCompra> itens = new HashSet<>();
+    private List<ItemCompra> itens = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.compra")
-    private Set<Entrega> entregas = new HashSet<>();
+
 
     public Compra(){}
 
@@ -50,21 +50,10 @@ public class Compra implements  Serializable {
         this.statusCompra = statusCompra.getCode();
     }
 
-    public Compra(Long idCompra,  StatusCompra statusCompra,  List<Item> itens) {
+    public Compra(Long idCompra,  StatusCompra statusCompra,  List<ItemCompra> itens) {
         this.idCompra = idCompra;
         this.statusCompra = statusCompra.getCode();
-        this.itens = new HashSet<>();
-        itens.forEach(item -> {
-            ItemCompra c = new ItemCompra();
-            c.setPreco(item.getPreco());
-            c.setQuantidade(item.getQuantidade());
-            Compra compra = new Compra();
-            compra.setIdCompra(idCompra);
-            c.setCompra(compra);
-            this.itens.add(c);
-        });
-
-
+        this.itens = itens;
     }
 
     public Long getIdCompra() {
@@ -106,38 +95,11 @@ public class Compra implements  Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-/*
-    public Set<Compra> getCompras(){
-        Set<Compra> set = new HashSet<>();
-        for(ItemCompra x : itens) {
-            set.add(x.getCompra());
-        }
-        return set;
-    }
 
 
-    public Set<Compra> getEntregas(){
-        Set<Compra> set = new HashSet<>();
-        for(Entrega x : entregas) {
-            set.add(x.getCompra());
-        }
-        return set;
-    }
-
-
-    public Double getTotal() {
-        Double sum = 0.0;
-        for(ItemCompra x: itens) {
-            sum+= x.getSubTotal();
-        }
-        return sum;
-    }
-
-    public Set<ItemCompra> getItens(){
+    public List<ItemCompra> getItens(){
         return itens;
     }
-
- */
 
     @PrePersist
     public void prePersist() {

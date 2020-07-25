@@ -49,7 +49,6 @@ public class CategoriaDto {
         this.tipoCategoria = tipoCategoria;
     }
 
-
     public Categoria toEntity() {
         return new Categoria(null, nome, tipoCategoria);
     }

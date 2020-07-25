@@ -6,9 +6,15 @@ import loja.api.model.entity.Categoria;
 import loja.api.model.entity.Produto;
 import loja.api.model.repository.CategoriaRepository;
 import loja.api.model.repository.ProdutoRepository;
+import loja.api.services.exception.DatabaseException;
+import loja.api.services.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 @Service
@@ -24,36 +30,54 @@ public class ProdutoService {
         return repository.save(entity);
     }
 
-
+    @Transactional(readOnly = true)
     public List<Produto> findByAll() {
         return repository.findByAll();
     }
 
-
+    @Transactional
     public ProdutoDto insert(ProdutoDto dto) {
         Produto entity = dto.toEntity();
-        setCategoria(entity, dto.getIdCategoria());
+        setCategoria(entity, dto.getCategoria());
         entity = repository.save(entity);
         return new ProdutoDto(entity);
     }
 
-    private void setCategoria(Produto entity, Long idCategoria) {
-            Categoria categoria =  new Categoria();
-            categoria.setIdCategoria(idCategoria);
+    private void setCategoria(Produto entity, Categoria categoria) {
         entity.setCategoria(categoria);
     }
 
+    @Transactional
+    public Produto update( Produto newEntity,Long id) {
+        try {
+            Produto entity = repository.getOne(id);
+            updateData(entity, newEntity);
+            entity = repository.save(entity);
+            return entity;
+        } catch (EntityNotFoundException e) {
+            e.printStackTrace();
+            throw new ResourceNotFoundException(id);
+        }
+    }
 
+    private void updateData(Produto entity, Produto newCategoria) {
+        entity.setCategoria(newCategoria.getCategoria());
+        entity.setDescricao(newCategoria.getDescricao());
+        entity.setNome(newCategoria.getNome());
+        entity.setPreco(newCategoria.getPreco());
+        entity.setQtdEstoque(entity.getQtdEstoque());
+    }
+
+    @Transactional
     public void delete(Long id) {
 
         try {
             repository.deleteById(id);
-        } catch (ConstraintViolationException e){
-            throw new BusinessException(("Existe um produto usando esa categoria."));
-        } catch (Exception e){
-            throw new BusinessException(("Erro interno no servidor."));
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
         }
-
     }
 
 }

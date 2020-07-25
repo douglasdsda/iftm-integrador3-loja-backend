@@ -52,14 +52,9 @@ public class ItemCompra implements  Serializable {
         this.preco = preco;
     }
 
-    public Compra getCompra(){
-       return this.id.getCompra();
-    }
-
     public Produto getProduto(){
         return this.id.getProduto();
     }
-
 
     public void setProduto(Produto entity){
         this.id.setProduto(entity);
@@ -68,7 +63,6 @@ public class ItemCompra implements  Serializable {
     public void setCompra(Compra entity){
         this.id.setCompra(entity);
     }
-
 
     public Double getSubTotal() {
         return preco * quantidade;

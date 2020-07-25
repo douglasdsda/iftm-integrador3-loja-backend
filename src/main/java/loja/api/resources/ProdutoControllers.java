@@ -3,7 +3,9 @@ package loja.api.resources;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import loja.api.dto.CategoriaDto;
 import loja.api.dto.ProdutoDto;
+import loja.api.model.entity.Categoria;
 import loja.api.model.entity.Produto;
 import loja.api.services.ProdutoService;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +56,14 @@ public class ProdutoControllers {
         ProdutoDto newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getIdProduto()).toUri();
         return ResponseEntity.created(uri).body(newDto);
+    }
+
+    @PutMapping("/{id}")
+    @ApiOperation("update de produto")
+    public ProdutoDto update(@RequestBody ProdutoDto dto, @PathVariable Long id) {
+        Produto entity = modelMapper.map(dto, Produto.class);
+        entity = service.update(entity, id);
+        return modelMapper.map(entity, ProdutoDto.class);
     }
 
     @DeleteMapping("/{id}")

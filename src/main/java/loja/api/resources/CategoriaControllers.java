@@ -49,6 +49,14 @@ public class CategoriaControllers {
         return listDto;
     }
 
+    @PutMapping("/{id}")
+    @ApiOperation("update de categoria")
+    public  CategoriaDto  update(@RequestBody CategoriaDto dto,@PathVariable Long id) {
+        Categoria entity = modelMapper.map(dto, Categoria.class);
+        entity = service.update(entity, id);
+        return modelMapper.map(entity, CategoriaDto.class);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

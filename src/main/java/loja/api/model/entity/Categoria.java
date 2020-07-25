@@ -29,9 +29,6 @@ public class Categoria implements  Serializable {
     @NotNull
     private Integer tipoCategoria;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private Set<Produto> produtos = new HashSet<>();
-
     private Instant dataCriacao;
 
     private Instant dataAtualizacao;
@@ -68,10 +65,6 @@ public class Categoria implements  Serializable {
         this.tipoCategoria = tipoCategoria.getCode();
     }
 
-    public void setProdutos(Set<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
     @PreUpdate
     public void preUpdate() {
         dataAtualizacao = Instant.now();
@@ -85,7 +78,4 @@ public class Categoria implements  Serializable {
     }
 
 
-    public Set<Produto> getProdutos() {
-        return produtos;
-    }
 }

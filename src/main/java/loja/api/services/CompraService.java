@@ -9,14 +9,13 @@ import loja.api.model.entity.ItemCompra;
 import loja.api.model.entity.Produto;
 import loja.api.model.enums.StatusCompra;
 import loja.api.model.repository.CompraRepository;
-import loja.api.model.repository.ItemProdutoRepository;
+import loja.api.model.repository.ItemCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CompraService {
@@ -25,10 +24,10 @@ public class CompraService {
     private CompraRepository repository;
 
     @Autowired
-    private ItemProdutoRepository itemProdutoRepository;
+    private ItemCompraRepository itemCompraRepository;
 
 
-    public Compra save(Compra entity, Long idCliente, List<Item> lista) {
+    public Compra save(Compra entity, Long idCliente, List<ItemCompra> lista) {
 
         entity.setStatusCompra(StatusCompra.ESPERANDO);
 
@@ -36,25 +35,15 @@ public class CompraService {
         c.setIdUsuario(idCliente);
         entity.setCliente(c);
 
+
+
         Compra compra = repository.save(entity);
 
-     List<ItemCompra> itensCompra = new ArrayList<>();
-        for ( Item item: lista
-             ) {
-            ItemCompra itemCompra = new ItemCompra();
-            itemCompra.setCompra(compra);
-            itemCompra.setPreco(item.getPreco());
-            itemCompra.setQuantidade(item.getQuantidade());
-            itemCompra.setQuantidade(item.getQuantidade());
-            Produto p = new Produto();
-            p.setIdProduto(item.getIdProduto());
+       lista.forEach( e -> {
+           e.setCompra(compra);
+       });
 
-            itemCompra.setProduto(p);
-
-            itensCompra.add(itemCompra);
-
-        }
-        itemProdutoRepository.saveAll(itensCompra);
+        itemCompraRepository.saveAll(lista);
 
         return compra;
 

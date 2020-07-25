@@ -4,11 +4,9 @@ package loja.api.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @Setter
 @Getter
@@ -24,4 +22,18 @@ public class Cliente extends Usuario {
     @Column(name = "ativo")
     private boolean ativo;
 
+    public Cliente(){}
+
+    public Cliente(String cpf, String urlImagem, boolean ativo) {
+        this.cpf = cpf;
+        this.urlImagem = urlImagem;
+        this.ativo = ativo;
+    }
+
+    public Cliente(Long idUsuario, @NotNull String nome, @NotNull String endereco, String email, String senha, String sexo, String cpf, String urlImagem, boolean ativo) {
+        super(idUsuario, nome, endereco, email, senha, sexo);
+        this.cpf = cpf;
+        this.urlImagem = urlImagem;
+        this.ativo = ativo;
+    }
 }

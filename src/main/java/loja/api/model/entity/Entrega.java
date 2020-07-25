@@ -64,7 +64,6 @@ public class Entrega implements  Serializable {
         return this.id.getCompra();
     }
 
-
     public void setEntregador(Entregador entity){
         this.id.setEntregador(entity);
     }

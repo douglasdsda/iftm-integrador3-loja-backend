@@ -22,7 +22,7 @@ public class CompraDto {
 
    private Long idCliente;
 
-    private List<Item> itens = new ArrayList<>();
+    private List<ItemCompra> itens = new ArrayList<>();
 
     CompraDto(){}
 
@@ -38,6 +38,9 @@ public class CompraDto {
         setStatusCompra(entity.getStatusCompra());
         setData(entity.getData());
         setIdCliente(entity.getCliente().getIdUsuario());
+
+        
+        setItens(entity.getItens());
     }
 
     public Long getIdCompra() {
@@ -72,11 +75,12 @@ public class CompraDto {
         this.idCliente = idCliente;
     }
 
-    public List<Item> getItens() {
+
+    public List<ItemCompra> getItens() {
         return itens;
     }
 
-    public void setItens(List<Item> itens) {
+    public void setItens(List<ItemCompra> itens) {
         this.itens = itens;
     }
 

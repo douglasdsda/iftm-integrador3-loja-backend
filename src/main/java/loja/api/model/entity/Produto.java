@@ -34,8 +34,7 @@ public class Produto implements Serializable {
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "id.produto")
-    private Set<ItemCompra> itens = new HashSet<>();
+
 
     public Produto(){}
 
@@ -95,11 +94,5 @@ public class Produto implements Serializable {
         this.categoria = categoria;
     }
 
-    public Set<Compra> getCompras(){
-        Set<Compra> set = new HashSet<>();
-        for(ItemCompra x : itens) {
-            set.add(x.getCompra());
-        }
-        return set;
-    }
+
 }

@@ -26,17 +26,17 @@ public class ProdutoDto {
 
     private double preco;
 
-    private Long idCategoria;
+    private Categoria categoria;
 
     ProdutoDto(){}
 
-    public ProdutoDto(Long idProduto, String nome, String descricao, Integer qtdEstoque, double preco, Long idCategoria) {
+    public ProdutoDto(Long idProduto, String nome, String descricao, Integer qtdEstoque, double preco, Categoria categoria) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.descricao = descricao;
         this.qtdEstoque = qtdEstoque;
         this.preco = preco;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
     }
 
     public ProdutoDto(Produto entity) {
@@ -45,7 +45,7 @@ public class ProdutoDto {
         setDescricao(entity.getDescricao());
         setPreco(entity.getPreco());
         setQtdEstoque(entity.getQtdEstoque());
-        setIdCategoria(entity.getCategoria().getIdCategoria());
+        setCategoria(entity.getCategoria());
 
     }
 
@@ -89,12 +89,12 @@ public class ProdutoDto {
         this.preco = preco;
     }
 
-    public Long getIdCategoria() {
-        return idCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Produto toEntity() {

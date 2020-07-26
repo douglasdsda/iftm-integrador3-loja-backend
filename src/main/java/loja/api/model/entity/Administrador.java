@@ -7,9 +7,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
-@Entity
+@Data
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @PrimaryKeyJoinColumn(name="idUsuario")
 public class Administrador extends Usuario {
 
@@ -17,13 +20,4 @@ public class Administrador extends Usuario {
     private String ultimoAjuste;
 
 
-
-    public Administrador(String ultimoAjuste) {
-        this.ultimoAjuste = ultimoAjuste;
-    }
-
-    public Administrador(Long idUsuario, @NotNull String nome, @NotNull String endereco, String email, String senha, String sexo, String ultimoAjuste) {
-        super(idUsuario, nome, endereco, email, senha, sexo);
-        this.ultimoAjuste = ultimoAjuste;
-    }
 }

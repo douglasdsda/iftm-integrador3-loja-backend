@@ -68,9 +68,9 @@ public class TestConfig implements CommandLineRunner {
         p5.setCategoria(cat2);
 
         produtoRepository.saveAll((Arrays.asList(p1, p2, p3, p4, p5)));
-
+/*
         Cliente u1 = new Cliente(null, "Maria Brown","rua a", "maria@gmail.com", "123456","F", "22.554.784.24","www",true);
-        Entregador u2 = new Entregador(null, "Maria Brown","rua a", "maria@gmail.com", "123456","F",true);
+       // Entregador u2 = new Entregador(null, "Maria Brown","rua a", "maria@gmail.com", "123456","F",true);
         Administrador u3 = new Administrador(null, "Maria Brown","rua a", "maria@gmail.com", "123456","F", "");
 
 

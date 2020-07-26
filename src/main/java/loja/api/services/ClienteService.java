@@ -22,9 +22,6 @@ public class ClienteService {
 
 
     public Cliente save(Cliente cliente) {
-        if(repository.existsByCpf(cliente.getCpf())){
-            throw new BusinessException(("cpf já cadastrado."));
-        }
         return repository.save(cliente);
     }
 

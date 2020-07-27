@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import loja.api.services.exception.DatabaseException;
 import loja.api.services.exception.ParamFormatException;
+import loja.api.services.exception.RegraNegocioException;
 import loja.api.services.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,14 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(ParamFormatException.class)
     public ResponseEntity<StandardError> paramFormat(ParamFormatException e, HttpServletRequest request){
+        String error = "Format error";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity<StandardError> paramFormat(RegraNegocioException e, HttpServletRequest request){
         String error = "Format error";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());

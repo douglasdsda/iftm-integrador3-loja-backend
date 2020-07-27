@@ -43,7 +43,7 @@ public class CompraService {
            e.setCompra(compra);
        });
 
-        itemCompraRepository.saveAll(lista);
+         compra.setItens(itemCompraRepository.saveAll(lista));
 
         return compra;
 

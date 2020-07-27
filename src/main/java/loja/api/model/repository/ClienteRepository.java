@@ -18,4 +18,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     @Query("SELECT obj FROM Cliente obj ")
     List<Cliente> findByAll();
+
+    @Query("SELECT obj FROM Cliente obj where obj.email = :email")
+    Cliente findByEmail(@Param("email") String email);
+
+    @Query("SELECT obj FROM Cliente obj where obj.email = :email or obj.cpf = :cpf")
+    Cliente findByEmailOrCpf(@Param("email")String email,@Param("cpf") String cpf);
 }

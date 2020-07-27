@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import loja.api.dto.AdministradorDto;
 import loja.api.dto.ClienteDto;
+import loja.api.dto.LoginDto;
 import loja.api.model.entity.Administrador;
 import loja.api.model.entity.Cliente;
 import loja.api.services.ClienteService;
@@ -38,6 +39,16 @@ public class ClienteControllers {
 
         Cliente entity = modelMapper.map(dto, Cliente.class);
         entity = service.save(entity);
+        return modelMapper.map(entity, ClienteDto.class);
+    }
+
+    @PostMapping(value = "/login")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Login")
+    public ClienteDto login(@RequestBody LoginDto dto) {
+
+
+        Cliente entity = service.login(dto);
         return modelMapper.map(entity, ClienteDto.class);
     }
 

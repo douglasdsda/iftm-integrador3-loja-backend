@@ -1,19 +1,25 @@
 package loja.api.services;
 
 
+import loja.api.dto.ClienteDto;
+import loja.api.dto.LoginDto;
 import loja.api.exception.BusinessException;
 import loja.api.model.entity.Cliente;
+import loja.api.model.entity.Produto;
 import loja.api.model.repository.ClienteRepository;
+import loja.api.services.exception.RegraNegocioException;
+import loja.api.services.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 @Service
-public class ClienteService {
+public class ClienteService  {
 
     @Autowired
     private ClienteRepository repository;
@@ -21,7 +27,22 @@ public class ClienteService {
 
 
 
-    public Cliente save(Cliente cliente) {
+    public Cliente save(Cliente cliente) throws RegraNegocioException {
+
+          if(cliente.getEmail().isEmpty()){
+              throw new RegraNegocioException("Email vazio");
+          }
+
+        if(cliente.getCpf().isEmpty()){
+            throw new RegraNegocioException("Cpf vazio");
+        }
+
+          Cliente c = repository.findByEmailOrCpf(cliente.getEmail(), cliente.getCpf());
+
+        if(c != null){
+            throw new RegraNegocioException("cpf ou email já existem.");
+        }
+
         return repository.save(cliente);
     }
 
@@ -52,4 +73,15 @@ public class ClienteService {
 
     }
 
+    @Transactional
+    public Cliente login(LoginDto dto) throws ResourceNotFoundException {
+
+        Cliente c = repository.findByEmail(dto.getEmail());
+        if(c == null || !c.getSenha().equals(dto.getSenha())){
+            throw new ResourceNotFoundException("senha ou email não invalidos.");
+        }
+
+        return c;
+
+    }
 }

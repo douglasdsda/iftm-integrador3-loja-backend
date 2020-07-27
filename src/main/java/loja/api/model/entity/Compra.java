@@ -101,6 +101,10 @@ public class Compra implements  Serializable {
         return itens;
     }
 
+    public void setItens(List<ItemCompra> itens) {
+        this.itens = itens;
+    }
+
     @PrePersist
     public void prePersist() {
         Instant now = Instant.now();

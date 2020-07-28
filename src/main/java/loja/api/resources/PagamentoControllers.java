@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/pagamentos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Slf4j
 @Api("Pagamento API")
 public class PagamentoControllers {

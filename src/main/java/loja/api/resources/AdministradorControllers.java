@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/administradores")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Slf4j
 @Api("Administrador API")
 public class AdministradorControllers {

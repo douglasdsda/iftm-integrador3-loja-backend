@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/categorias")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Slf4j
 @Api("Categoria API")
 public class CategoriaControllers {

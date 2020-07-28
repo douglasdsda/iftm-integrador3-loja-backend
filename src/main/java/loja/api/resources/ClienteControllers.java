@@ -8,6 +8,7 @@ import loja.api.dto.ClienteDto;
 import loja.api.dto.LoginDto;
 import loja.api.model.entity.Administrador;
 import loja.api.model.entity.Cliente;
+import loja.api.model.entity.ItemCompra;
 import loja.api.services.ClienteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/clientes")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Slf4j
 @Api("Cliente API")
 public class ClienteControllers {
@@ -51,7 +53,17 @@ public class ClienteControllers {
         Cliente entity = service.login(dto);
         return modelMapper.map(entity, ClienteDto.class);
     }
+/*
+    @PostMapping(value = "/compras")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Login")
+    public List<ItemCompra> login(@RequestBody ClienteDto dto) {
 
+
+        Cliente entity = service.compras(dto);
+        return modelMapper.map(entity, ClienteDto.class);
+    }
+*/
     @GetMapping("/all")
     @ApiOperation("listar todos os Clientes")
     public List<ClienteDto> findAll() {

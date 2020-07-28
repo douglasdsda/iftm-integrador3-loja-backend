@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/produtos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Slf4j
 @Api("Produto API")
 public class ProdutoControllers {

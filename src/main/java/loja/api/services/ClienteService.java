@@ -7,6 +7,7 @@ import loja.api.exception.BusinessException;
 import loja.api.model.entity.Cliente;
 import loja.api.model.entity.Produto;
 import loja.api.model.repository.ClienteRepository;
+import loja.api.model.repository.ItemCompraRepository;
 import loja.api.services.exception.RegraNegocioException;
 import loja.api.services.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ public class ClienteService  {
     @Autowired
     private ClienteRepository repository;
 
-
+    @Autowired
+    private ItemCompraRepository itemCompraRepository;
 
 
     public Cliente save(Cliente cliente) throws RegraNegocioException {
@@ -77,11 +79,17 @@ public class ClienteService  {
     public Cliente login(LoginDto dto) throws ResourceNotFoundException {
 
         Cliente c = repository.findByEmail(dto.getEmail());
-        if(c == null || !c.getSenha().equals(dto.getSenha())){
+        if(c == null || !c.getSenha().equals(dto.getPassword())){
             throw new ResourceNotFoundException("senha ou email não invalidos.");
         }
 
         return c;
 
+    }
+
+    public Cliente compras(ClienteDto dto) {
+
+        //itemCompraRepository.findByCliente(dto.getIdCliente());
+        return null;
     }
 }
